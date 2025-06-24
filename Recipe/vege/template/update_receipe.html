@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipe Submission Form</title>
+  <style>
+    .recipe-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .recipe-table th,
+  .recipe-table td {
+    border: 1px solid #ddd; /* Border around cells */
+    padding: 8px; /* Spacing inside cells */
+  }
+
+  .recipe-table th {
+    background-color: #f2f2f2; /* Light grey background for header */
+    text-align: left;
+  }
+
+  .recipe-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light background for even rows */
+  }
+
+  .recipe-table tr:hover {
+    background-color: #eaeaea; /* Highlight on hover */
+  }
+    /* For from Css*/
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      background-color: pink;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      background-color: #fff;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #0d6efd;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #333;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+      width: 100%;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 15px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]:focus,
+    input[type="file"]:focus,
+    textarea:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+      outline: none;
+    }
+
+    button {
+      background-color: #0d6efd;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0b5ed7;
+    }
+
+    @media (max-width: 576px) {
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Update Your Recipe</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <label for="recipeName">Recipe Name</label>
+      <input type="text" required name="recipe_name"  value="{{recipe.recipe_name}}" id="recipeName">
+
+      <label for="recipeDescription">Recipe Description</label>
+      <textarea id="recipeDescription" required name="recipe_description" rows="4">{{recipe.recipe_description}}</textarea>
+
+      <label for="recipeImage">Recipe Image</label>
+      <input type="file" id="recipeImage" name="recipe_image" accept="image/*" />
+
+      <button type="submit">Update Recipe</button>
+    </form>
+    </div>
+</body>
+</html>

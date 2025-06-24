@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restaurant Home</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff;
+      color: #333;
+    }
+
+    .bg-image {
+      background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      position: relative;
+      color: white;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      font-size: 1rem;
+      margin: 10px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-btn {
+      background-color: #ff7043;
+      color: white;
+    }
+
+    .signup-btn {
+      background-color: #29b6f6;
+      color: white;
+    }
+
+    .login-btn:hover {
+      background-color: #e64a19;
+    }
+
+    .signup-btn:hover {
+      background-color: #0288d1;
+    }
+
+    .menu-section {
+      padding: 60px 20px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+
+    .menu-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .menu-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .menu-card {
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 280px;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .menu-card .card-content {
+      padding: 15px;
+    }
+
+    .menu-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+      color: #444;
+    }
+
+    .menu-card p {
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .btn {
+        width: 80%;
+      }
+
+      .menu-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <div class="bg-image">
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>Welcome to Foodie's Paradise</h1>
+      <p>Delicious meals delivered right to your table</p>
+      <div>
+        <a href="/login"><button class="btn login-btn">Login</button></a>
+        <a href="/signup"><button class="btn signup-btn">Sign Up</button></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu Section -->
+  <section class="menu-section">
+  <h2>Featured Menu</h2>
+
+  <!-- Gujarati Food -->
+  <h3 style="margin-top: 40px; font-size: 2rem; color: #ff7043;">Gujarati</h3>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <img src="https://treehousehotels.in/wp-content/uploads/2024/04/Untitled-design-2024-04-03T153207.126-600x500.png" alt="Gujarati Thali">
+      <div class="card-content">
+        <h3>Gujarati Thali</h3>
+        <p>Traditional meal with roti, dal, kadhi, rice, and sweets.</p>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZwIS1yE1jjbnzjaT_ZcdO8K_-vUDKB9cTDA&s" alt="Dhokla">
+      <div class="card-content">
+        <h3>Dhokla</h3>
+        <p>Steamed savory cake made from fermented rice and chickpea batter.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- South Indian Food -->
+  <h3 style="margin-top: 40px; font-size: 2rem; color: #29b6f6;">South Indian</h3>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9tXNH_xCEYOU9wjkNFLKfCHUf1mvc8QmR4g&s" alt="Masala Dosa">
+      <div class="card-content">
+        <h3>Masala Dosa</h3>
+        <p>Crispy dosa filled with spiced mashed potatoes, served with chutney and sambar.</p>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80" alt="Idli Sambar">
+      <div class="card-content">
+        <h3>Idli Sambar</h3>
+        <p>Soft steamed rice cakes served with sambar and coconut chutney.</p>
+      </div>
+    </div>
+  </div>
+
+ 
+
+
+</section>
+
+</body>
+</html>

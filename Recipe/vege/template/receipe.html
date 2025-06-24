@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submit Your Recipe</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .bg-image {
+      background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836');
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      background-color: rgba(255, 255, 255, 0.97);
+      margin: 60px auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      text-align: center;
+      color: #c0392b;
+      font-family: 'Georgia', serif;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px #fff;
+    }
+
+    label {
+      font-weight: bold;
+      color: #555;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #e67e22;
+      box-shadow: 0 0 5px rgba(230, 126, 34, 0.5);
+      outline: none;
+    }
+
+    .vis, button {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+
+    .vis:hover, button:hover {
+      background-color: #c0392b;
+    }
+
+    .vi {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    table.recipe-table {
+      width: 95%;
+      margin: 40px auto;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .recipe-table th,
+    .recipe-table td {
+      border: 1px solid #ddd;
+      padding: 12px 15px;
+      text-align: center;
+    }
+
+    .recipe-table th {
+      background-color: #f8c291;
+      color: #2d3436;
+    }
+
+    .recipe-table tr:nth-child(even) {
+      background-color: #fef5e7;
+    }
+
+    .recipe-table tr:hover {
+      background-color: #f9e79f;
+    }
+
+    .recipe-table img {
+      border-radius: 8px;
+      height: 100px;
+    }
+
+    .btn-danger, .btn-success {
+      padding: 8px 12px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn-danger {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .btn-success {
+      background-color: #2ecc71;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #c0392b;
+    }
+
+    .btn-success:hover {
+      background-color: #27ae60;
+    }
+
+    @media (max-width: 576px) {
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      .recipe-table {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-image">
+    <div class="overlay"></div>
+
+    <div class="container">
+      <h1>Submit Your Recipe</h1>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="recipeName">Recipe Name</label>
+        <input type="text" required name="recipe_name" id="recipeName">
+
+        <label for="recipeDescription">Recipe Description</label>
+        <textarea id="recipeDescription" required name="recipe_description" rows="4"></textarea>
+
+        <label for="recipeImage">Recipe Image</label>
+        <input type="file" id="recipeImage" name="recipe_image" accept="image/*" />
+
+        <button type="submit" class="vis">Add Recipe</button>
+      </form>
+
+      <hr>
+
+      <form method="get">
+        <div class="mt-1"> 
+          <label for="search" class="vi"> Search Recipe </label>
+          <input type="text" name="search" id="search">
+        </div>
+        <div class="vi">
+          <button type="submit" class="vis">Search</button>
+        </div>
+      </form>
+    </div>
+
+    {% if is_new_user %}
+      <p style="text-align:center; font-weight:bold; color: #fff; position: relative; z-index: 2;">
+        You haven't added any recipes yet. Start by creating one!
+      </p>
+    {% else %}
+    <table class="recipe-table">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Recipe Name</th>
+          <th>Recipe Description</th>
+          <th>Recipe Image</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in recipe %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ i.recipe_name }}</td>
+          <td>{{ i.recipe_description }}</td>
+          <td>
+            {% if i.recipe_image %}
+              <img src="{{ i.recipe_image.url }}">
+            {% else %}
+              No Image
+            {% endif %}
+          </td>
+          <td>
+            <a href="{% url 'delete_recipe' i.id %}" class="btn-danger">Delete</a>
+            <a href="{% url 'update_recipe' i.id %}" class="btn-success">Update</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</body>
+</html>
