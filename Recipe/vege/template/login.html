@@ -76,13 +76,13 @@
 
     <div class="login-container">
         <h2>Login to Foodies Delight</h2>
-
-        {% if messages %}
+        
+{% if messages %}
 <div class="alert alert-{{ message.tags }}">
-            {% for message in messages %}
+{% for message in messages %}
 {{ message }}
-            {% endfor %}
-        {% endif %}
+{% endfor %}
+{% endif %}
 
         <form method="POST">
             {% csrf_token %}
