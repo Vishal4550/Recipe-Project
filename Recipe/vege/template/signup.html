@@ -102,10 +102,12 @@
       <input type="password" name="password" id="password" required>
 
       <button type="submit">Sign Up</button>
- {% if messages %}
-  {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-  {% endfor %}
+{% if messages %}
+<div class="alert alert-{{ message.tags }}">
+{% for message in messages %}
+{{ message }}
+{% endfor %}
+</div>
 {% endif %}
     </form>
     <p class="text-center">Already have an account? <a href="{% url 'login_user' %}">Login</a></p>
