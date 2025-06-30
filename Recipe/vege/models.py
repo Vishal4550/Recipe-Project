@@ -7,4 +7,8 @@ class Recipes(models.Model):
     recipe_description=models.TextField()
     recipe_image=models.ImageField(upload_to="receipe")
     recipe_view_count =models.IntegerField(default=0)
-    
+
+
+
+
+        
